@@ -8,8 +8,8 @@ class Particle : public RigidBody
 {
 public:
 	//Constructors/Destructors
-	Particle();
-	virtual ~Particle();
+	Particle(); 
+	virtual ~Particle(); 
 };
 
 #endif //PARTICLE_H
