@@ -20,7 +20,7 @@ public:
 	glm::vec2& GetBuoyancy() { return m_buoyancy; }
 	void SetBuoyancy(glm::vec2 _buoyancy) { m_buoyancy = _buoyancy; }
 	glm::vec2& GetBuoyancyDecay() { return m_buoyancyDecay; }
-	void SetBuoyancy(glm::vec2 _buoyancyDecay) { m_buoyancyDecay = _buoyancyDecay; }
+	void SetBuoyancyDecay(glm::vec2 _buoyancyDecay) { m_buoyancyDecay = _buoyancyDecay; }
 	glm::vec2& GetWind() { return m_wind; }
 	void SetWind(glm::vec2 _wind) { m_wind = _wind; }
 	glm::vec2& GetRandomForce() { return m_randomForce; }
