@@ -146,6 +146,7 @@ copy /Y "$(SolutionDir)External\SDL2_mixer-2.6.2\lib\x86\SDL2_mixer.dll" "$(Targ
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="PhysicsController.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="RigidBody.cpp" />
@@ -173,6 +174,7 @@ copy /Y "$(SolutionDir)External\SDL2_mixer-2.6.2\lib\x86\SDL2_mixer.dll" "$(Targ
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="PhysicsController.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RigidBody.h" />

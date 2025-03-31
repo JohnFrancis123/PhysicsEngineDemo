@@ -5,22 +5,17 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Controller.h"
-#include "Renderer.h" //we include these in the cpp and NOT the header, because
-#include "WavDraw.h"
-#include "SoundEffect.h"
-
-#include "StandardIncludes.h"
+#include "Timing.h"
+#include "PhysicsController.h"
 
 GameController::GameController() {
 	m_quit = false;
 	m_sdlEvent = { };
 	m_renderer = nullptr;
-	m_input = nullptr;
-	m_audio = nullptr;
-	memset(m_effects, 0, sizeof(SoundEffect*) * MaxEffectChannels); //clearing all memory in each popinter (setting the entire array to null/0)
 	m_fArial20 = nullptr;
-	m_wavDraw = nullptr;
-	m_zoomY = 5;
+	m_input = nullptr;
+	m_timing = nullptr;
+	m_physics = nullptr;
 }
 
 GameController::~GameController() {
@@ -34,14 +29,15 @@ void GameController::Initialize() {
 	m_input = &InputController::Instance();
 	m_fArial20 = new TTFont();
 	m_fArial20->Initialize(20);
-	m_audio = &AudioController::Instance();
-	m_wavDraw = new WavDraw();
-	m_effects[0] = m_audio->LoadEffect("../Assets/Audio/Effects/Whoosh.wav");
+	m_timing = &Timing::Instance();
+	m_physics = &PhysicsController::Instance();
+
+	Particle::Pool = new ObjectPool<Particle>;
+
 }
 
 void GameController::ShutDown() {
 	delete m_fArial20;
-	delete m_wavDraw; //deleting in shutdonw, since we manually allocated this object.
 }
 
 void GameController::HandleInput(SDL_Event _event) {
@@ -49,12 +45,8 @@ void GameController::HandleInput(SDL_Event _event) {
 		(m_input->KB()->KeyUp(m_sdlEvent, SDLK_ESCAPE))) {
 		m_quit = true;
 	}
-
 	else if (m_input->KB()->KeyUp(m_sdlEvent, SDLK_a)) {
-		m_zoomY += 0.5f;
-	}
-	else if (m_input->KB()->KeyUp(m_sdlEvent, SDLK_s)) {
-		m_zoomY -= 0.5f;
+		m_physics->AddParticle(glm::vec2{ 300 + rand() % 400, 200 }, 3 + rand() % 5);
 	}
 
 	m_input->MS()->ProcessButtons(_event);
@@ -63,6 +55,8 @@ void GameController::HandleInput(SDL_Event _event) {
 void GameController::RunGame() {
 	Initialize();
 	while (!m_quit) {
+		m_timing->Tick();
+
 		m_renderer->SetDrawColor(Color(255, 255, 255, 255));
 		m_renderer->ClearScreen();
 
@@ -70,8 +64,17 @@ void GameController::RunGame() {
 		{
 			HandleInput(m_sdlEvent);
 		}
+		m_physics->Update(m_timing->GetDeltaTime());
 
-		m_wavDraw->DrawWave(m_effects[0]->GetData(), m_renderer, m_zoomY);
+		for (Particle* p : m_physics->GetParticles()) {
+			m_renderer->SetDrawColor(Color(0, 0, 0, 255));
+			m_renderer->RenderPoint(Point{ p->GetPosition().x, p->GetPosition().y });
+		}
+
+		m_fArial20->Write(m_renderer->GetRenderer(), ("FPS: " + to_string(m_timing->GetFPS())).c_str(), SDL_Color{ 0, 0, 255 }, SDL_Point{ 10, 10 });
+		m_fArial20->Write(m_renderer->GetRenderer(), m_physics->ToString().c_str(), SDL_Color{0, 0, 255}, SDL_Point{110, 10});
+
+
 
 		SDL_RenderPresent(m_renderer->GetRenderer());
 	}

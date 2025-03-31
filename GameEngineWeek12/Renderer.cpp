@@ -20,7 +20,7 @@ void Renderer::Initialize() {
 	M_ASSERT((SDL_Init(SDL_INIT_EVERYTHING) >= 0), ""); //review this line
 	SDL_GetDisplayBounds(0, &m_srcRect); //returns the display bounds
 	m_window = SDL_CreateWindow("SDL Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		m_srcRect.w, m_srcRect.h, SDL_WINDOW_FULLSCREEN); //SDL_WINDOW_FULLSCREEN. Also h was y. we changed in the lecture.
+		m_srcRect.w, m_srcRect.h, 0); //SDL_WINDOW_FULLSCREEN. Also h was y. we changed in the lecture. Changed to 0 as of assignment 2
 	M_ASSERT(m_window != nullptr, "Failed to initialize SDL window.");
 	m_renderer = SDL_CreateRenderer(Renderer::Instance().GetWindow(), -1, 0); //replace with SDL_RENDERER_PRESENTVSYNC to enable vsync ((it breaks stuff, try not to. Probably shouldn't though.
 	M_ASSERT(m_renderer != nullptr, "Failed to initialize SDL renderer.");

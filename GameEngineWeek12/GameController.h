@@ -7,9 +7,8 @@
 class Renderer;
 class TTFont;
 class InputController;
-class SoundEffect;
-class Song;
-class WavDraw;
+class Timing;
+class PhysicsController;
 
 class GameController : public Singleton<GameController>
 {
@@ -31,10 +30,9 @@ private:
 	TTFont* m_fArial20;
 	bool m_quit;
 	InputController* m_input;
-	AudioController* m_audio;
-	WavDraw* m_wavDraw;
-	SoundEffect* m_effects[MaxEffectChannels];
-	float m_zoomY;
+	Timing* m_timing;
+	PhysicsController* m_physics;
+
 };
 
 #endif // GAME_CONTROLLER_H

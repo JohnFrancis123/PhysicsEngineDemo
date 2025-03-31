@@ -18,7 +18,7 @@ public:
 	glm::vec2& GetVelocity() { return m_velocity; }
 	void SetVelocity(glm::vec2 _velocity) { m_velocity = _velocity; }
 	float GetMass() { return m_mass; }
-	float SetMass(float _mass) { m_mass = _mass; }
+	void SetMass(float _mass) { m_mass = _mass; }
 	bool GetDead() { return m_dead; }
 	void SetDead(bool _dead) { m_dead = _dead; }
 	
