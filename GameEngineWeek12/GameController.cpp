@@ -32,8 +32,6 @@ void GameController::Initialize() {
 	m_timing = &Timing::Instance();
 	m_physics = &PhysicsController::Instance();
 
-	Particle::Pool = new ObjectPool<Particle>;
-
 }
 
 void GameController::ShutDown() {

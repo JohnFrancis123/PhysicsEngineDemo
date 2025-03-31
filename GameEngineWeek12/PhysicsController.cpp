@@ -6,6 +6,10 @@ PhysicsController::PhysicsController() {
 	m_force = glm::vec2{ 0,0 };
 }
 
+PhysicsController::~PhysicsController() {
+	delete Particle::Pool;
+}
+
 void PhysicsController::Update(float _deltaTime) {
 	for (int count = 0; count < m_particles.size(); count++) {
 		Particle* p = m_particles[count];
