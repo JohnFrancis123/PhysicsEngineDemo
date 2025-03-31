@@ -9,6 +9,7 @@
 #include "PhysicsController.h"
 #include "SpriteSheet.h"
 #include "SpriteAnim.h"
+#include "RigidBody.h"
 
 GameController::GameController() {
 	m_quit = false;
@@ -18,8 +19,7 @@ GameController::GameController() {
 	m_input = nullptr;
 	m_timing = nullptr;
 	m_physics = nullptr;
-	m_fire = nullptr;
-	m_smoke = nullptr;
+	m_circle = nullptr;
 }
 
 GameController::~GameController() {
@@ -38,17 +38,11 @@ void GameController::Initialize() {
 
 	SpriteSheet::Pool = new ObjectPool<SpriteSheet>();
 	SpriteAnim::Pool = new ObjectPool<SpriteAnim>();
-	m_fire = SpriteSheet::Pool->GetResource();
-	m_fire->Load("../Assets/Textures/Fire.tga");
-	m_fire->SetSize(6, 10, 64, 64);
-	m_fire->AddAnimation(EN_AN_IDLE, 0, 60, 20.0f);
-	m_fire->SetBlendMode(SDL_BLENDMODE_BLEND);
-
-	m_smoke = SpriteSheet::Pool->GetResource();
-	m_smoke->Load("../Assets/Textures/Smoke.tga");
-	m_smoke->SetSize(5, 6, 128, 128);
-	m_smoke->AddAnimation(EN_AN_SMOKE_RISE, 0, 30, 20.0f);
-	m_smoke->SetBlendMode(SDL_BLENDMODE_BLEND);
+	m_circle = SpriteSheet::Pool->GetResource();
+	m_circle->Load("../Assets/Textures/Circle.tga");
+	m_circle ->SetSize(1, 1, 32, 32);
+	m_circle->AddAnimation(EN_AN_IDLE, 0, 1, 0.0f);
+	m_circle->SetBlendMode(SDL_BLENDMODE_BLEND);
 }
 
 void GameController::ShutDown() {
@@ -74,12 +68,11 @@ void GameController::HandleInput(SDL_Event _event) {
 		m_quit = true;
 	}
 	else if (m_input->KB()->KeyUp(m_sdlEvent, SDLK_a)) {
-		Particle* p = m_physics->AddParticle(glm::vec2{ 340 + rand() % 25, 230 + rand() % 10 }, 3 + rand() % 3);
-		p->SetBuoyancy(glm::vec2{ 0, 45 });
-		p->SetBuoyancyDecay(glm::vec2{ 0, 15 });
-		p->SetMass(1.0f);
-		p->SetRandomForce(glm::vec2{ -15 + rand() % 30, 0 });
-		p->SetWind(glm::vec2{ 5 + rand() % 5, 0 });
+		glm::vec2 pos = glm::vec2{ 16 + rand() % ( 1920 - 32 ), 16 + rand() % (1080 - 32) };
+		glm::vec2 dest = glm::vec2{ rand() % 1920, rand() % 1080 };
+		glm::vec2 dir = dest - pos;
+		dir = glm::normalize(dir) * 200.0f;
+		m_physics->AddRigidBody(pos, dir, rand() % 128);
 	}
 
 	m_input->MS()->ProcessButtons(_event);
@@ -99,13 +92,10 @@ void GameController::RunGame() {
 		}
 		m_physics->Update(m_timing->GetDeltaTime());
 
-		m_renderer->RenderTexture(m_fire, m_fire->Update(EN_AN_IDLE, m_timing->GetDeltaTime()), Rect(300, 200, 400, 300));
-		Rect r = m_smoke->Update(EN_AN_SMOKE_RISE, m_timing->GetDeltaTime());
-		for (Particle* p : m_physics->GetParticles()) {
-			m_renderer->SetDrawColor(Color(0, 0, 0, 255));
-			int size = p->GetCurrentSize() * 100 / 2;
-			auto pos = p->GetPosition();
-			m_renderer->RenderTexture(m_smoke, r, Rect(pos.x - size, pos.y - size, pos.x + size, pos.y + size), (1.0f - p->GetCurrentSize()) * 255);
+		Rect r = m_circle->Update(EN_AN_IDLE, m_timing->GetDeltaTime());
+		for (RigidBody* b : m_physics->GetBodies()) {
+			auto pos = b->GetPosition();
+			m_renderer->RenderTexture(m_circle, r, Rect(pos.x - 16, pos.y - 16, pos.x + 16, pos.y + 16),  b->GetMass() + 127);
 		}
 
 		m_fArial20->Write(m_renderer->GetRenderer(), ("FPS: " + to_string(m_timing->GetFPS())).c_str(), SDL_Color{ 0, 0, 255 }, SDL_Point{ 10, 10 });
