@@ -24,7 +24,7 @@ GameController::GameController() {
 
 GameController::~GameController() {
 	ShutDown();
-}
+}//
 
 void GameController::Initialize() {
 	AssetController::Instance().Initialize(10000000); //Allocate 10MB
