@@ -30,7 +30,7 @@ public:
 	void SetMass(float _mass) { m_mass = _mass; }
 	bool GetDead() { return m_dead; }
 	void SetDead(bool _dead) { m_dead = _dead; }
-	
+
 	//Methods
 	virtual void Update(float _deltaTime, glm::vec2 _force);
 	virtual void Reset();
@@ -48,8 +48,7 @@ private:
 	glm::vec2 m_randomForce;
 	float m_mass;
 	bool m_dead;
-}
+};
 
-;
 
 #endif //RIGIDBODY_H

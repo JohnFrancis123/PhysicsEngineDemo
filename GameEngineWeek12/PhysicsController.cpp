@@ -53,15 +53,19 @@ void PhysicsController::Update(float _deltaTime) {
 		b->Update(_deltaTime, glm::vec2{ 0, 0 });
 		if (b->GetPosition().x >= p.X - 16) {
 			Reflect(out, b->GetVelocity(), glm::vec2(-1, 0));
+			b->SetVelocity(out);
 		}
 		else if (b->GetPosition().x <= 16) {
 			Reflect(out, b->GetVelocity(), glm::vec2(1, 0));
+			b->SetVelocity(out);
 		}
 		else if (b->GetPosition().y >= p.Y - 16) {
 			Reflect(out, b->GetVelocity(), glm::vec2(0, -1));
+			b->SetVelocity(out);
 		}
 		else if (b->GetPosition().y <= 16) {
 			Reflect(out, b->GetVelocity(), glm::vec2(0, 1));
+			b->SetVelocity(out);
 		}
 	}
 	//See if there are any intersections
