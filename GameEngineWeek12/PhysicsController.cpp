@@ -75,7 +75,7 @@ void PhysicsController::Update(float _deltaTime) {
 		for (int c2 = c1 + 1; c2 < m_bodies.size(); c2++) {
 
 			RigidBody* b1 = m_bodies[c1];
-			RigidBody* b2 = m_bodies[c2];
+			RigidBody* b2 = m_bodies[c2]; //
 			float dist = glm::distance(b1->GetPosition(), b2->GetPosition());
 			if (dist <= 32) {
 				HandleCollision(b1, b2, dist);
