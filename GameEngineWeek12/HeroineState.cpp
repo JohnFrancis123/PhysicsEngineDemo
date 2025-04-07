@@ -60,6 +60,7 @@ void DivingState::Update(Heroine* _heroine, float _deltaTime) {
 	_heroine->GetAnimations()->Update(EN_AN_CROUCH, _deltaTime, _heroine->GetSrcRect());
 	if (_heroine->GetAnimations()->GetCurrentClip(EN_AN_CROUCH) >= 66.0f) {
 		_heroine->GetRigidBody()->SetRandomForce(glm::vec2(0, 0));
+		_heroine->GetAnimations()->ResetCurrentClip(EN_AN_CROUCH);
 		_heroine->SetState(HeroineState::GetStandingState());
 	}
 }
