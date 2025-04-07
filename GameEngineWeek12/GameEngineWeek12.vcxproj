@@ -142,6 +142,8 @@ copy /Y "$(SolutionDir)External\SDL2_mixer-2.6.2\lib\x86\SDL2_mixer.dll" "$(Targ
     <ClCompile Include="FileController.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameEngineWeek12.cpp" />
+    <ClCompile Include="Heroine.cpp" />
+    <ClCompile Include="HeroineState.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -169,6 +171,8 @@ copy /Y "$(SolutionDir)External\SDL2_mixer-2.6.2\lib\x86\SDL2_mixer.dll" "$(Targ
     <ClInclude Include="Controller.h" />
     <ClInclude Include="FileController.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="Heroine.h" />
+    <ClInclude Include="HeroineState.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />

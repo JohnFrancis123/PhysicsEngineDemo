@@ -90,6 +90,12 @@
     <ClCompile Include="PhysicsController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HeroineState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Heroine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset.h">
@@ -177,6 +183,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroineState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Heroine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

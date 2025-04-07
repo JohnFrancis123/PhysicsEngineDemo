@@ -27,14 +27,31 @@ void SpriteSheet::AddAnimation(AnimationNames _name, short _clipStart, short  _c
 }
 
 Rect SpriteSheet::Update(AnimationNames _name, float _deltaTime) {
-	short s = m_animations[_name]->GetClipCurrent();
-	short posX = s % m_columns * m_clipSizeX;
-	short posY = s / m_columns * m_clipSizeY;
-	Rect r = Rect(posX, posY, posX + m_clipSizeX, posY + m_clipSizeY);
+	Rect r = Rect();
+	//short s = m_animations[_name]->GetClipCurrent();
+	//short posX = s % m_columns * m_clipSizeX;
+	//short posY = s / m_columns * m_clipSizeY;
+	//Rect r = Rect(posX, posY, posX + m_clipSizeX, posY + m_clipSizeY);
 
-	m_animations[_name]->Update(_deltaTime);
+	//m_animations[_name]->Update(_name, _deltaTime, &r);
+	
+	Update(_name, _deltaTime, &r);
 
 	return r;
+}
+
+void SpriteSheet::Update(AnimationNames _name, float _deltaTime, Rect* _rect) {
+	short s = m_animations[_name]->GetClipCurrent();
+	_rect->X1 = s % m_columns * m_clipSizeX;
+	_rect->Y1 = s / m_columns * m_clipSizeY;
+	_rect->X2 = _rect->X1 + m_clipSizeX;
+	_rect->Y2 = _rect->Y1 + m_clipSizeY;
+
+	m_animations[_name]->Update(_deltaTime);
+}
+
+void SpriteSheet::ResetCurrentClip(AnimationNames _name) {
+	m_animations[_name]->Reset();
 }
 
 void SpriteSheet::Serialize(std::ostream& _stream) {

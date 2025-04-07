@@ -50,22 +50,13 @@ void PhysicsController::Update(float _deltaTime) {
 	glm::vec2 out;
 	for (int count = 0; count < m_bodies.size(); count++) {
 		RigidBody* b = m_bodies[count];
-		b->Update(_deltaTime, glm::vec2{ 0, 0 });
-		if (b->GetPosition().x >= p.X - 16) {
-			Reflect(out, b->GetVelocity(), glm::vec2(-1, 0));
-			b->SetVelocity(out);
-		}
-		else if (b->GetPosition().x <= 16) {
-			Reflect(out, b->GetVelocity(), glm::vec2(1, 0));
-			b->SetVelocity(out);
-		}
-		else if (b->GetPosition().y >= p.Y - 16) {
-			Reflect(out, b->GetVelocity(), glm::vec2(0, -1));
-			b->SetVelocity(out);
-		}
-		else if (b->GetPosition().y <= 16) {
-			Reflect(out, b->GetVelocity(), glm::vec2(0, 1));
-			b->SetVelocity(out);
+		m_force.y = m_gravity; //THIS NEW STUFF MAY NEED TO STATE
+		b->Update(_deltaTime, m_force);
+		if (b->GetPosition().y >= 200) {
+			glm::vec2 p = b->GetPosition();
+			p.y = 200;
+			b->SetPosition(p);
+			b->SetVelocity(glm::vec2(0, 0));
 		}
 	}
 	//See if there are any intersections
@@ -74,7 +65,7 @@ void PhysicsController::Update(float _deltaTime) {
 
 		for (int c2 = c1 + 1; c2 < m_bodies.size(); c2++) {
 
-			RigidBody* b1 = m_bodies[c1];
+			RigidBody* b1 = m_bodies[c1]; 
 			RigidBody* b2 = m_bodies[c2]; //
 			float dist = glm::distance(b1->GetPosition(), b2->GetPosition());
 			if (dist <= 32) {

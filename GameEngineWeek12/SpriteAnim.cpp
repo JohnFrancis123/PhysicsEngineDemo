@@ -24,11 +24,15 @@ void SpriteAnim::ClearMemory() {
 	m_clipCurrent = 0;
 }
 
+void SpriteAnim::Reset() {
+	m_clipCurrent = m_clipStart;
+}
+
 void SpriteAnim::Update(float _deltaTime)
 {
 	m_clipCurrent += m_clipSpeed * _deltaTime;
 	if (m_clipCurrent > m_clipEnd) {
-		m_clipCurrent = m_clipStart;
+		Reset();
 	}
 }
 
