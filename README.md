@@ -1,8 +1,8 @@
-# 🎮 Physics Engine Demo
+# Physics Engine Demo
 
 A 2D physics engine demonstration built in C++ using SDL2, OpenGL, and GLM. This project showcases a custom game engine with particle systems, rigid body dynamics, collision detection, and character animation.
 
-## ✨ Features
+## Features
 
 ### Physics System
 - **Rigid Body Dynamics** - Real-time physics simulation with mass, velocity, and acceleration
@@ -27,7 +27,7 @@ A 2D physics engine demonstration built in C++ using SDL2, OpenGL, and GLM. This
 - **Object Pooling** - Efficient memory reuse for particles and sprites
 - **Stack Allocator** - Custom memory allocator for performance optimization
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Language**: C++ 
 - **Graphics**: SDL2, OpenGL, GLEW
@@ -36,7 +36,7 @@ A 2D physics engine demonstration built in C++ using SDL2, OpenGL, and GLM. This
 - **Fonts**: SDL2_ttf
 - **Window Management**: GLFW
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Windows OS** (configured for Visual Studio)
 - **Visual Studio 2017 or later** with C++ development tools
@@ -44,7 +44,7 @@ A 2D physics engine demonstration built in C++ using SDL2, OpenGL, and GLM. This
 
 All dependencies (SDL2, OpenGL libraries, etc.) are included in the `External/` directory.
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
@@ -65,13 +65,13 @@ cd PhysicsEngineDemo
 - Press `F5` to run with debugging, or `Ctrl+F5` to run without debugging
 - The application window will launch and display the physics simulation
 
-## 🎯 Controls
+## Controls
 
 - **ESC** - Exit the application
 - **Arrow Keys/WASD** - Character movement (if implemented)
 - **Space** - Character jump/interaction
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 PhysicsEngineDemo/
@@ -102,7 +102,7 @@ PhysicsEngineDemo/
 └── GameEngineWeek12.sln       # Visual Studio solution file
 ```
 
-## 🔑 Key Components
+## Key Components
 
 ### Physics Controller
 Manages all physics objects and applies forces:
@@ -128,7 +128,7 @@ Demonstrates physics integration with:
 - Animated sprites
 - Physics-based movement
 
-## 🎨 Assets Included
+## Assets Included
 
 - **Warrior.tga** - Animated character sprite sheet (17x6 frames)
 - **Circle.tga** - Particle texture
@@ -136,7 +136,7 @@ Demonstrates physics integration with:
 - **Smoke.tga** - Smoke particle sprite sheet
 - **Rock.tga** - Rock/debris sprites
 
-## 🧩 Design Patterns Used
+## Design Patterns Used
 
 - **Singleton Pattern** - GameController, PhysicsController, Renderer
 - **State Pattern** - Character state management
@@ -144,7 +144,7 @@ Demonstrates physics integration with:
 - **Factory Pattern** - Asset creation and management
 - **Observer Pattern** - Input event handling
 
-## 🔧 Development
+## Development
 
 ### Adding New Physics Objects
 ```cpp
@@ -170,13 +170,13 @@ body->SetWind(glm::vec2(5.0f, 0.0f));
 body->SetRandomForce(glm::vec2(1.0f, 1.0f));
 ```
 
-## 🐛 Known Issues
+## Known Issues
 
 - Currently configured for Windows/Visual Studio only
 - Asset paths are relative and require running from specific directories
 - Some physics parameters may need tuning for specific scenarios
 
-## 🤝 Contributing
+## Contributing
 
 This is an educational/demonstration project. Feel free to fork and experiment with:
 - Additional physics features (springs, joints, constraints)
@@ -184,21 +184,21 @@ This is an educational/demonstration project. Feel free to fork and experiment w
 - Enhanced collision detection (SAT, GJK)
 - Cross-platform support (Linux, macOS)
 
-## 📝 License
+## License
 
 This project is available for educational purposes. Check individual library licenses in the `External/` directory.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - SDL2 development team for the multimedia library
 - OpenGL community for graphics support
 - GLM for math operations
 - Various sprite artists for asset contributions
 
-## 📧 Contact
+## Contact
 
 For questions or feedback, please open an issue on the GitHub repository.
 
 ---
 
-**Built with ❤️ as a physics engine demonstration project**
+**Built with as a physics engine demonstration project**
